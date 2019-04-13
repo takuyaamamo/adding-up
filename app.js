@@ -44,11 +44,12 @@ rl.on('close', () => {
   // Array.formで連想配列を普通の配列に変換している
   // sort関数意味不明、[1]で配列の1番目を持ってきている
   const rankingArray = Array.from(prefectureDataMap).sort((pair1, pair2) => {
-    return pair2[1].change - pair1[1].change;
+    return pair1[1].change - pair2[1].change;
   });
   // ここのmapは配列をkey,valueで受け取り、更に整形できる関数Mapとは違う
-  const rankingStrings = rankingArray.map(([key, value]) => {
-    return key + ': ' + value.popu10 + '=>' + value.popu15 + ' 変化率:' + value.change;
+  const rankingStrings = rankingArray.map(([key, value], i) => {
+    i = i + 1;
+    return i + '位' + key + ': ' + value.popu10 + '=>' + value.popu15 + ' 変化率:' + value.change;
   })
   console.log(rankingStrings);
 });
